@@ -1,5 +1,6 @@
 # Compiled class file
 *.class
+bin/
 
 # Log file
 *.log
@@ -24,10 +25,15 @@ hs_err_pid*
 # Eclipse files
 .project
 .classpath
+.settings/
+.metadata/
 .lock
 version.ini
 *.xml
 *.css
 *.html
+doc/
 package-list
+class-use/
+index-files/
 
