@@ -299,7 +299,7 @@ public class ASL {
 				pointer.write(180);
 				middle.write(0);
 				ring.write(180);
-				pinky.write(1800);
+				pinky.write(180);
 				break;
 				
 				
