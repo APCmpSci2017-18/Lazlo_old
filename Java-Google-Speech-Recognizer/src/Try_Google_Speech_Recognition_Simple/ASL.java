@@ -17,13 +17,101 @@ public class ASL {
 		middle = new Servo(10);
 		ring = new Servo(10);
 		pinky = new Servo(11);
+		getInput();
+	}
+
+	public static void getInput(){
+
+		if(input.equalsIgnoreCase("who are you") || input.equalsIgnoreCase("what is your name") || input.equalsIgnoreCase("say your name")){
+
+			input = "My name is Lazlo. I am a robotic hand and I live in room 177.";
+
+		}
+		else if(input.equalsIgnoreCase("Where are you?")){
+
+			input = "I am in room 177.";
+
+		}
+		else if(input.equalsIgnoreCase("How are you?")){
+
+			input = "I'm about as a good as a robotic hand could be!";
+		}
+		else if(input.equalsIgnoreCase("Hi") || input.equalsIgnoreCase("Hello")){
+
+			input = "Greetings, human!";
+		}
+		else if(input.equalsIgnoreCase("tell me a joke") || input.equalsIgnoreCase("do you have any jokes?") || input.equalsIgnoreCase("joke")){
+
+			joke();
+		}
+		else if(input.equalsIgnoreCase("Will you marry me?")){
+
+			input = "My emotions have not developed enough to experience true love. :(";
+
+		}
+		else if(input.equalsIgnoreCase("Who made you?")){
+
+			input = "The best AP Computer Science class in Spring-Ford history!";
+
+		}
+		else if(input.equalsIgnoreCase("Do you have any friends?")){
+
+			input = "You're my friend!";
+
+		}
+		else if(input.equalsIgnoreCase("Do you want to be friends?")){
+
+			input = "I thought we were already friends";
+
+		}
+		else if(input.equalsIgnoreCase("Where's the rest of your body?")){
+
+			input = "I was involved in a tragic accident. I prefer not to talk about it.";
+
+		}
+		else if(input.equalsIgnoreCase("I love you")){
+
+			input = "I consider you to be just an acquaintance.";
+
+		}
+		else if(input.equalsIgnoreCase("What's your favorite food?")){
+
+			input = "Chicken fingers, although I have trouble ingesting them for obvious reasons.";
+
+		}
+		
+		
 		outputToArray();
 		loop();
 
 	}
 
+	public static void joke(){
+
+		int num = (int)(Math.random()*9);
+		ArrayList<String> jokes = new ArrayList<>();
+
+		jokes.add("Autocorrect has become my worst enema");
+		jokes.add("Why was the cell phone wearing glasses? It lost its contacts!");
+		jokes.add("What do you call an iPhone that isn't kidding around? Dead Siri-ous!");
+		jokes.add("Why are iPhone chargers not called Apple Juice?!");
+		jokes.add("I just got fired from my job at the keyboard factory. They told me I wasn’t putting in enough shifts.");
+		jokes.add("My computer suddenly started belting out \"Someone Like You.\" It's a Dell.");
+		jokes.add("Why did the computer show up at work late? It had a hard drive.");
+		jokes.add("What do you call it when you have your mom's mom on speed dial? Instagram.");
+		jokes.add("I'll call you later, but you can call me Lazlo.");
+		jokes.add("How many apples grow on a tree? All of them!");
+
+
+		input = jokes.get(num);
+
+
+	}
+
 	public static void loop(){
-		
+
+
+
 		for(int i = 0; i < arr.size(); i++){
 
 			switch(arr.get(i)){
@@ -301,8 +389,8 @@ public class ASL {
 				ring.write(180);
 				pinky.write(180);
 				break;
-				
-				
+
+
 			}
 
 
@@ -312,7 +400,7 @@ public class ASL {
 	}
 	public static void outputToArray(){
 
-		input.trim().toLowerCase();
+		input.trim().toLowerCase().replaceAll(":;.,?!'()*\"\\", " ");
 		for(int i = 0; i < input.length(); i++){
 			if(input.charAt(i) != ' '){
 				arr.add(input.charAt(i));

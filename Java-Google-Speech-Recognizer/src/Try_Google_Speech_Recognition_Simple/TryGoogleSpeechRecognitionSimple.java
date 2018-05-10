@@ -3,7 +3,6 @@ package Try_Google_Speech_Recognition_Simple;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -25,7 +24,7 @@ public class TryGoogleSpeechRecognitionSimple implements GSpeechResponseListener
 	public static void main(String[] args) throws IOException {
 		final Microphone mic = new Microphone(FLACFileWriter.FLAC);
 		//Don't use the below google api key , make your own !!! :) 
-		GSpeechDuplex duplex = new GSpeechDuplex("AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw");
+		GSpeechDuplex duplex = new GSpeechDuplex("Lazlo177");
 		
 		duplex.setLanguage("en");
 		
@@ -105,26 +104,12 @@ public class TryGoogleSpeechRecognitionSimple implements GSpeechResponseListener
 					output = output + " (" + (String) gr.getOtherPossibleResponses().get(0) + ")";
 				}
 				System.out.println(output);
-				
 				response.setText("");
 				response.append(this.old_text);
 				response.append(output);
 			}
 		});
 	}
-	
-	public void outputToArray(String output){
-
-		ArrayList<Character> arr = new ArrayList<>();
-		output.trim();
-		for(int i = 0; i < output.length(); i++){
-			if(output.charAt(i) != ' '){
-				arr.add(output.charAt(i));
-			}	
-		}
-	}
-	
-	
 	
 	@Override
 	public void onResponse(GoogleResponse paramGoogleResponse) {
