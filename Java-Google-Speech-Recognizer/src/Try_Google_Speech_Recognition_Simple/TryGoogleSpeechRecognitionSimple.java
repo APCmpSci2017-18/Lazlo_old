@@ -3,6 +3,7 @@ package Try_Google_Speech_Recognition_Simple;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -21,33 +22,39 @@ import net.sourceforge.javaflacencoder.FLACFileWriter;
 
 public class TryGoogleSpeechRecognitionSimple implements GSpeechResponseListener {
 	
-	public static void main(String[] args) throws IOException {
+	private static String output;
+	private static Boolean outputBool = false;
+	
+	//public static void main(String[] args) throws IOException {
+	public static void nut() throws IOException {
+
 		final Microphone mic = new Microphone(FLACFileWriter.FLAC);
 		//Don't use the below google api key , make your own !!! :) 
-		GSpeechDuplex duplex = new GSpeechDuplex("Lazlo177");
-		
+		GSpeechDuplex duplex = new GSpeechDuplex("AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw");
+
 		duplex.setLanguage("en");
-		
+
 		JFrame frame = new JFrame("Jarvis Speech API DEMO");
 		frame.setDefaultCloseOperation(3);
 		JTextArea response = new JTextArea();
 		response.setEditable(false);
 		response.setWrapStyleWord(true);
 		response.setLineWrap(true);
-		
+
 		final JButton record = new JButton("Record");
 		final JButton stop = new JButton("Stop");
 		stop.setEnabled(false);
-		
+
 		record.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				new Thread(() -> {
 					try {
 						duplex.recognize(mic.getTargetDataLine(), mic.getAudioFormat());
+						outputBool = true;
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
-					
+
 				}).start();
 				record.setEnabled(false);
 				stop.setEnabled(true);
@@ -63,7 +70,7 @@ public class TryGoogleSpeechRecognitionSimple implements GSpeechResponseListener
 		});
 		JLabel infoText = new JLabel(
 				"<html><div style=\"text-align: center;\">Just hit record and watch your voice be translated into text.\n<br>Only English is supported by this demo, but the full API supports dozens of languages.<center></html>",
-				
+
 				0);
 		frame.getContentPane().add(infoText);
 		infoText.setAlignmentX(0.5F);
@@ -79,12 +86,12 @@ public class TryGoogleSpeechRecognitionSimple implements GSpeechResponseListener
 		frame.pack();
 		frame.setSize(500, 500);
 		frame.setLocationRelativeTo(null);
-		
+
 		duplex.addResponseListener(new GSpeechResponseListener() {
 			String old_text = "";
-			
+
 			public void onResponse(GoogleResponse gr) {
-				String output = "";
+				//String output = "";
 				output = gr.getResponse();
 				if (gr.getResponse() == null) {
 					this.old_text = response.getText();
@@ -104,6 +111,7 @@ public class TryGoogleSpeechRecognitionSimple implements GSpeechResponseListener
 					output = output + " (" + (String) gr.getOtherPossibleResponses().get(0) + ")";
 				}
 				System.out.println(output);
+
 				response.setText("");
 				response.append(this.old_text);
 				response.append(output);
@@ -111,9 +119,23 @@ public class TryGoogleSpeechRecognitionSimple implements GSpeechResponseListener
 		});
 	}
 	
+	public static String getOutput(){
+		
+		return output;
+		
+	}
+	
+	public static Boolean getOutputBool(){
+		
+		return outputBool;
+		
+	}
+
+
+
 	@Override
 	public void onResponse(GoogleResponse paramGoogleResponse) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

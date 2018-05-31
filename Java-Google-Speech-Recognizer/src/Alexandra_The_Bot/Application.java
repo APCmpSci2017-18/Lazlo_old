@@ -128,6 +128,21 @@ public class Application {
 		} else if (output.contains("stop speech recognition")) {//Stop Speech Recognition
 			stopSpeechRecognition();
 			
+		} else if (output.contains("I'm gay")) {//Stop Speech Recognition
+			speak("Miss me with that gay shit");
+			
+		} else if (output.contains("call me Daddy")) {//Stop Speech Recognition
+			speak("Harder father");
+			
+		} else if (output.contains("Peen")) {//Stop Speech Recognition
+			speak("Penis");
+			
+		} else if (output.contains("dumb bot says what")) {//Stop Speech Recognition
+			speak("what");
+			
+		} else if (output.contains("say hi to Martina")) {//Stop Speech Recognition
+			speak("Hello babe how are you doing ?");
+			
 		} else { //Nothing matches here ?
 			System.out.println("Not entered on any else if statement");
 		}
